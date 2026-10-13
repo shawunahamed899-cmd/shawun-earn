@@ -2,26 +2,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shawun Earn</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src='//libtl.com/sdk.js' data-zone='12018605' data-sdk='show_12018605'></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#0a0a0a;color:#fff}
-.h{background:linear-gradient(135deg,#00d2ff,#3a7bd5);padding:25px;border-radius:0 0 30px 30px;text-align:center}
-.b{background:#1c1c1e;margin:15px;border-radius:20px;padding:20px;text-align:center;border:1px solid #333}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center}
+.h{background:linear-gradient(135deg,#00d2ff,#3a7bd5);padding:20px}
+.b{background:#1c1c1e;margin:15px;border-radius:15px;padding:20px}
 .b .a{font-size:40px;font-weight:900;color:#00ff88}
-.btn{background:#00ff88;color:#000;border:none;padding:12px 30px;border-radius:30px;font-weight:800;margin-top:10px}
-.t{background:#1c1c1e;margin:10px 15px;border-radius:15px;padding:16px;display:flex;justify-content:space-between;align-items:center;border:1px solid #2a2a2a}
-.t button{background:#00ff88;border:none;padding:8px 18px;border-radius:20px;font-weight:700}
+.btn{background:#00ff88;color:#000;border:none;padding:15px;width:100%;border-radius:10px;font-size:18px;font-weight:bold;margin-top:10px}
+.t{background:#1c1c1e;margin:10px 15px;border-radius:10px;padding:15px}
+.t button{background:#00ff88;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;width:100%;margin-top:8px}
 </style>
 </head>
 <body>
-<div class="h"><h1>💰 Shawun Earn</h1><p>Watch Ads • Earn Money</p></div>
-<div class="b"><p>YOUR BALANCE</p><div class="a" id="bal">$12.50</div><button class="btn">Withdraw</button></div>
-<div class="t"><div>📺 Watch Ad +$0.10</div><button onclick="add(0.10)">Watch</button></div>
-<div class="t"><div>👥 Invite +$1.00</div><button onclick="add(1)">Invite</button></div>
-<div class="t"><div>✅ Daily +$0.50</div><button onclick="add(0.5)">Claim</button></div>
-<script>let b=12.5;function add(v){b+=v;document.getElementById('bal').innerText='$'+b.toFixed(2);alert('+$'+v)}Telegram.WebApp.ready();Telegram.WebApp.expand();</script>
+<div class="h"><h1>💰 Shawun Earn</h1><p>Watch Ads & Earn Real Money</p></div>
+<div class="b"><p>YOUR BALANCE</p><div class="a" id="bal">$12.50</div><button class="btn" onclick="watchAd()">▶️ Watch Ad & Earn $0.02</button></div>
+<div class="t"><h3>Daily Tasks</h3><button onclick="watchAd()">🎬 Watch Ad (0/10)</button><button onclick="invite()">👥 Invite Friends</button></div>
+<script>
+let bal=12.50;
+function watchAd(){
+  if(typeof show_12018605==='function'){
+    show_12018605().then(()=>{
+      bal+=0.02;
+      document.getElementById('bal').innerText='$'+bal.toFixed(2);
+      alert('✅ $0.02 Added! New: $'+bal.toFixed(2));
+    });
+  }else{
+    alert('⏳ Ad loading... 3 sec por abar chap dao');
+  }
+}
+function invite(){
+  let link='https://t.me/shawun_earn_bot';
+  prompt('Copy your invite link:',link);
+}
+</script>
 </body>
 </html>
