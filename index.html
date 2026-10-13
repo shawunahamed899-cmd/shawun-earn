@@ -1,42 +1,95 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shawun Earn</title>
+
+<!-- শেয়ার করলে এই বাংলা লেখা আসবে -->
+<meta property="og:title" content="💰 Shawun Earn - প্রতিদিন ৫০০ টাকা ইনকাম">
+<meta property="og:description" content="🔥 100% পেমেন্ট গ্যারান্টি! শুধু অ্যাড দেখুন, বন্ধুদের ইনভাইট করুন আর বিকাশ/নগদে টাকা নিন। একদম ফ্রি, এখনই জয়েন করুন!">
+<meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/138/138292.png">
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src='//libtl.com/sdk.js' data-zone='12018605' data-sdk='show_12018605'></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center}
-.h{background:linear-gradient(135deg,#00d2ff,#3a7bd5);padding:20px}
-.b{background:#1c1c1e;margin:15px;border-radius:15px;padding:20px}
-.b .a{font-size:40px;font-weight:900;color:#00ff88}
-.btn{background:#00ff88;color:#000;border:none;padding:15px;width:100%;border-radius:10px;font-size:18px;font-weight:bold;margin-top:10px}
-.t{background:#1c1c1e;margin:10px 15px;border-radius:10px;padding:15px}
-.t button{background:#00ff88;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;width:100%;margin-top:8px}
+body{background:#0a0a0a;color:#fff;font-family:Arial;padding:12px;text-align:center}
+.h{background:linear-gradient(135deg,#00d2ff,#3a7bd5);padding:22px;border-radius:16px}
+.b{background:#1c1c1e;margin:12px 0;border-radius:15px;padding:20px;border:1px solid #2a2a2a}
+.a{font-size:42px;font-weight:900;color:#00ff88;margin:8px 0}
+.btn{background:#00ff88;color:#000;border:none;padding:15px;width:100%;border-radius:10px;font-size:16px;font-weight:bold;margin-top:10px}
+.btn2{background:#222;color:#fff;border:1px solid #333}
+input,select{width:100%;padding:13px;border-radius:10px;background:#000;color:#fff;border:1px solid #444;margin-top:10px;box-sizing:border-box}
 </style>
 </head>
 <body>
-<div class="h"><h1>💰 Shawun Earn</h1><p>Watch Ads & Earn Real Money</p></div>
-<div class="b"><p>YOUR BALANCE</p><div class="a" id="bal">$12.50</div><button class="btn" onclick="watchAd()">▶️ Watch Ad & Earn $0.02</button></div>
-<div class="t"><h3>Daily Tasks</h3><button onclick="watchAd()">🎬 Watch Ad (0/10)</button><button onclick="invite()">👥 Invite Friends</button></div>
+
+<div class="h">
+<h2>💰 Shawun Earn</h2>
+<p style="font-size:13px;margin-top:4px">Watch Ads & Earn Real Money</p>
+</div>
+
+<div class="b">
+<div style="font-size:12px;color:#aaa">YOUR BALANCE</div>
+<div class="a" id="balance">$12.50</div>
+<button class="btn" onclick="watchAd()">▶️ Watch Ad & Earn $0.02</button>
+</div>
+
+<div class="b">
+<h3>Daily Tasks</h3>
+<button class="btn" onclick="watchAd()">🎬 Watch Ad (0/10)</button>
+<button class="btn btn2" onclick="invite()">👥 Invite Friends - Get $1</button>
+<div id="refBox" style="display:none;margin-top:12px;background:#000;padding:10px;border-radius:8px;border:1px dashed #00ff88;color:#00ff88;font-size:12px;word-break:break-all"></div>
+</div>
+
+<div class="b" style="border:1px solid #ffcc00">
+<h3>💸 টাকা উত্তোলন</h3>
+<p style="color:#888;font-size:12px;margin:6px 0">Minimum Withdraw $10</p>
+<select id="method">
+<option>Bkash</option>
+<option>Nagad</option>
+<option>Rocket</option>
+<option>Binance</option>
+</select>
+<input id="number" type="number" placeholder="তোমার Bkash/Nagad নাম্বার দাও">
+<button class="btn" style="background:#ffcc00" onclick="withdraw()">💰 Withdraw Now</button>
+<p id="hist" style="font-size:12px;color:#aaa;margin-top:10px"></p>
+</div>
+
 <script>
-let bal=12.50;
+const tg = window.Telegram.WebApp; tg.expand();
+let bal = 12.50;
+let refLink = `https://t.me/shawun_earn_bot?start=${tg.initDataUnsafe?.user?.id || '12345'}`;
+
 function watchAd(){
-  if(typeof show_12018605==='function'){
-    show_12018605().then(()=>{
-      bal+=0.02;
-      document.getElementById('bal').innerText='$'+bal.toFixed(2);
-      alert('✅ $0.02 Added! New: $'+bal.toFixed(2));
-    });
-  }else{
-    alert('⏳ Ad loading... 3 sec por abar chap dao');
-  }
+  if(typeof show_12018605 === 'function'){ show_12018605().then(()=>{ addBal(); }); } else { addBal(); }
 }
+function addBal(){
+  bal += 0.02;
+  document.getElementById('balance').innerText = '$' + bal.toFixed(2);
+  alert('✅ $0.02 যোগ হয়েছে! ব্যালেন্স: $' + bal.toFixed(2));
+}
+
 function invite(){
-  let link='https://t.me/shawun_earn_bot';
-  prompt('Copy your invite link:',link);
+  let b=document.getElementById('refBox');
+  b.style.display='block';
+  b.innerHTML = `তোমার রেফার লিংক:<br><br>${refLink}<br><br>এটা শেয়ার করলে প্রতি রেফারে $1 পাবে!`;
+  navigator.clipboard.writeText(refLink);
+  alert('✅ রেফার লিংক কপি হয়েছে!');
+}
+
+function withdraw(){
+  let n=document.getElementById('number').value;
+  let m=document.getElementById('method').value;
+  if(bal < 10){ alert('❌ Minimum $10 লাগবে! তোমার আছে $'+bal.toFixed(2)); return; }
+  if(n.length < 10){ alert('❌ সঠিক নাম্বার দাও'); return; }
+  alert('✅ Withdraw Request Success!\n\nAmount: $'+bal.toFixed(2)+'\nMethod: '+m+'\nNumber: '+n+'\n\n24 ঘন্টার মধ্যে পেমেন্ট পাবে।');
+  document.getElementById('hist').innerText = 'Pending: $'+bal.toFixed(2)+' to '+n+' ('+m+')';
+  bal=0;
+  document.getElementById('balance').innerText='$0.00';
 }
 </script>
 </body>
