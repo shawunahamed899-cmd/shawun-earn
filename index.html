@@ -1,96 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shawun Earn</title>
-
-<!-- শেয়ার করলে এই বাংলা লেখা আসবে -->
-<meta property="og:title" content="💰 Shawun Earn - প্রতিদিন ৫০০ টাকা ইনকাম">
-<meta property="og:description" content="🔥 100% পেমেন্ট গ্যারান্টি! শুধু অ্যাড দেখুন, বন্ধুদের ইনভাইট করুন আর বিকাশ/নগদে টাকা নিন। একদম ফ্রি, এখনই জয়েন করুন!">
-<meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/138/138292.png">
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src='//libtl.com/sdk.js' data-zone='12018605' data-sdk='show_12018605'></script>
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0a;color:#fff;font-family:Arial;padding:12px;text-align:center}
-.h{background:linear-gradient(135deg,#00d2ff,#3a7bd5);padding:22px;border-radius:16px}
-.b{background:#1c1c1e;margin:12px 0;border-radius:15px;padding:20px;border:1px solid #2a2a2a}
-.a{font-size:42px;font-weight:900;color:#00ff88;margin:8px 0}
-.btn{background:#00ff88;color:#000;border:none;padding:15px;width:100%;border-radius:10px;font-size:16px;font-weight:bold;margin-top:10px}
-.btn2{background:#222;color:#fff;border:1px solid #333}
-input,select{width:100%;padding:13px;border-radius:10px;background:#000;color:#fff;border:1px solid #444;margin-top:10px;box-sizing:border-box}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#03101e">
+  <title>SHAWUN EARN | Online Earning</title>
+  <meta name="description" content="SHAWUN EARN - অনলাইনে কাজ ও আয়ের সুযোগ সম্পর্কে জানুন।">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:#03101e;color:#f5f8ff;line-height:1.7}
+    header{padding:18px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #123047}
+    .logo{font-size:23px;font-weight:bold;color:#f5f8ff}
+    .logo span,.green{color:#00ef91}
+    nav a{color:#dce7f1;text-decoration:none;margin-left:14px;font-size:14px}
+    .hero{padding:75px 7%;text-align:center;background:radial-gradient(ellipse at top,#064b43 0%,#03101e 65%)}
+    .tag{display:inline-block;border:1px solid #087c65;border-radius:30px;padding:5px 14px;color:#00ef91;font-size:13px}
+    h1{font-size:clamp(34px,7vw,58px);line-height:1.2;margin:22px 0}
+    .hero p{max-width:650px;margin:0 auto 25px;color:#c6d4e1}
+    .btn{display:inline-block;background:#00ef91;color:#03101e;text-decoration:none;font-weight:bold;padding:12px 23px;border-radius:30px;margin:5px}
+    .btn2{border:1px solid #00ef91;color:#00ef91;background:transparent}
+    section{padding:48px 7%}
+    .section-title{text-align:center;font-size:29px;margin-bottom:24px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+    .card{background:#071b2b;border:1px solid #123a4c;border-radius:16px;padding:23px;text-align:center}
+    .card .icon{font-size:30px}
+    .card h3{color:#00ef91;margin:8px 0}
+    .card p{font-size:14px;color:#c6d4e1}
+    .about{text-align:center;background:#061625}
+    .notice{max-width:720px;margin:20px auto 0;padding:17px;border-radius:12px;border:1px solid #12634f;color:#c6d4e1}
+    footer{text-align:center;padding:25px 12px;border-top:1px solid #123047;color:#9fb2c5;font-size:13px}
+    @media(max-width:600px){header{padding:15px 4%;flex-wrap:wrap;gap:8px}nav{width:100%;display:flex;justify-content:space-between}nav a{margin:0;font-size:12px}.hero{padding:55px 5%}section{padding:38px 5%}}
+  </style>
 </head>
 <body>
+  <header>
+    <div class="logo">⚡ SHAWUN <span>EARN</span></div>
+    <nav>
+      <a href="#home">হোম</a>
+      <a href="#features">সুবিধা</a>
+      <a href="#about">আমাদের সম্পর্কে</a>
+    </nav>
+  </header>
 
-<div class="h">
-<h2>💰 Shawun Earn</h2>
-<p style="font-size:13px;margin-top:4px">Watch Ads & Earn Real Money</p>
-</div>
+  <main>
+    <section class="hero" id="home">
+      <span class="tag">✦ অনলাইন আয়ের তথ্য প্ল্যাটফর্ম</span>
+      <h1>Welcome to<br>SHAWUN <span class="green">EARN</span></h1>
+      <h2>ঘরে বসে অনলাইনে কাজ শিখুন</h2>
+      <p>অনলাইনে কাজের সুযোগ, ডিজিটাল দক্ষতা এবং আয়ের পদ্ধতি সম্পর্কে জানুন। নিজের দক্ষতা বাড়ান এবং সচেতনভাবে আপনার অনলাইন যাত্রা শুরু করুন।</p>
+      <a class="btn" href="#features">শুরু করুন →</a>
+      <a class="btn btn2" href="#about">আরও জানুন</a>
+    </section>
 
-<div class="b">
-<div style="font-size:12px;color:#aaa">YOUR BALANCE</div>
-<div class="a" id="balance">$12.50</div>
-<button class="btn" onclick="watchAd()">▶️ Watch Ad & Earn $0.02</button>
-</div>
+    <section id="features">
+      <h2 class="section-title">আমাদের <span class="green">সুবিধা</span></h2>
+      <div class="cards">
+        <div class="card"><div class="icon">📱</div><h3>অনলাইন কাজ</h3><p>মোবাইল দিয়ে ডিজিটাল কাজ শেখার তথ্য।</p></div>
+        <div class="card"><div class="icon">🎯</div><h3>সহজ নির্দেশনা</h3><p>নতুনদের জন্য ধাপে ধাপে গাইড।</p></div>
+        <div class="card"><div class="icon">🔒</div><h3>নিরাপত্তা</h3><p>বিশ্বস্ত সেবা বেছে নেওয়ার পরামর্শ।</p></div>
+        <div class="card"><div class="icon">💡</div><h3>দক্ষতা উন্নয়ন</h3><p>গ্রাফিক ডিজাইন ও অনলাইন কাজ সম্পর্কে জানুন।</p></div>
+      </div>
+    </section>
 
-<div class="b">
-<h3>Daily Tasks</h3>
-<button class="btn" onclick="watchAd()">🎬 Watch Ad (0/10)</button>
-<button class="btn btn2" onclick="invite()">👥 Invite Friends - Get $1</button>
-<div id="refBox" style="display:none;margin-top:12px;background:#000;padding:10px;border-radius:8px;border:1px dashed #00ff88;color:#00ff88;font-size:12px;word-break:break-all"></div>
-</div>
+    <section class="about" id="about">
+      <h2 class="section-title">About <span class="green">SHAWUN EARN</span></h2>
+      <p>SHAWUN EARN হলো অনলাইন কাজ ও ডিজিটাল দক্ষতা সম্পর্কে তথ্য দেওয়ার একটি প্ল্যাটফর্ম।</p>
+      <div class="notice">⚠️ আয়ের পরিমাণ নিশ্চিত নয়। কোনো কাজ বা বিজ্ঞাপন থেকে আয় হবে কি না, তা সংশ্লিষ্ট সেবার নিয়ম ও অনুমোদনের ওপর নির্ভর করে।</div>
+      <a class="btn" href="#home">হোমে ফিরে যান ↑</a>
+    </section>
+  </main>
 
-<div class="b" style="border:1px solid #ffcc00">
-<h3>💸 টাকা উত্তোলন</h3>
-<p style="color:#888;font-size:12px;margin:6px 0">Minimum Withdraw $10</p>
-<select id="method">
-<option>Bkash</option>
-<option>Nagad</option>
-<option>Rocket</option>
-<option>Binance</option>
-</select>
-<input id="number" type="number" placeholder="তোমার Bkash/Nagad নাম্বার দাও">
-<button class="btn" style="background:#ffcc00" onclick="withdraw()">💰 Withdraw Now</button>
-<p id="hist" style="font-size:12px;color:#aaa;margin-top:10px"></p>
-</div>
-
-<script>
-const tg = window.Telegram.WebApp; tg.expand();
-let bal = 12.50;
-let refLink = `https://t.me/shawun_earn_bot?start=${tg.initDataUnsafe?.user?.id || '12345'}`;
-
-function watchAd(){
-  if(typeof show_12018605 === 'function'){ show_12018605().then(()=>{ addBal(); }); } else { addBal(); }
-}
-function addBal(){
-  bal += 0.02;
-  document.getElementById('balance').innerText = '$' + bal.toFixed(2);
-  alert('✅ $0.02 যোগ হয়েছে! ব্যালেন্স: $' + bal.toFixed(2));
-}
-
-function invite(){
-  let b=document.getElementById('refBox');
-  b.style.display='block';
-  b.innerHTML = `তোমার রেফার লিংক:<br><br>${refLink}<br><br>এটা শেয়ার করলে প্রতি রেফারে $1 পাবে!`;
-  navigator.clipboard.writeText(refLink);
-  alert('✅ রেফার লিংক কপি হয়েছে!');
-}
-
-function withdraw(){
-  let n=document.getElementById('number').value;
-  let m=document.getElementById('method').value;
-  if(bal < 10){ alert('❌ Minimum $10 লাগবে! তোমার আছে $'+bal.toFixed(2)); return; }
-  if(n.length < 10){ alert('❌ সঠিক নাম্বার দাও'); return; }
-  alert('✅ Withdraw Request Success!\n\nAmount: $'+bal.toFixed(2)+'\nMethod: '+m+'\nNumber: '+n+'\n\n24 ঘন্টার মধ্যে পেমেন্ট পাবে।');
-  document.getElementById('hist').innerText = 'Pending: $'+bal.toFixed(2)+' to '+n+' ('+m+')';
-  bal=0;
-  document.getElementById('balance').innerText='$0.00';
-}
-</script>
+  <footer>
+    <p>© 2026 SHAWUN EARN. All rights reserved.</p>
+    <p>Work Smart • Learn Online • Build Your Future</p>
+  </footer>
 </body>
 </html>
