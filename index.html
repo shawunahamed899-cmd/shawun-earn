@@ -152,7 +152,80 @@ function withdraw(){
   const db = getFirestore(app);
 
   console.log("SHAWUN EARN Firebase initialized");
+
+const emailInput = document.getElementById("account-email");
+const passwordInput = document.getElementById("account-password");
+const message = document.getElementById("account-message");
+const accountInfo = document.getElementById("my-account");
+
+document.getElementById("create-account").addEventListener("click", async () => {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  if (!email || password.length < 6) {
+    message.textContent = "সঠিক ইমেইল ও অন্তত ৬ অক্ষরের পাসওয়ার্ড দাও।";
+    return;
+  }
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    message.textContent = "অ্যাকাউন্ট তৈরি হয়েছে!";
+  } catch (error) {
+    message.textContent = "সমস্যা: " + error.message;
+  }
+});
+
+document.getElementById("login-account").addEventListener("click", async () => {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    message.textContent = "লগইন সফল হয়েছে!";
+  } catch (error) {
+    message.textContent = "লগইন করা যায়নি। ইমেইল ও পাসওয়ার্ড পরীক্ষা করো।";
+  }
+});
+
+document.getElementById("logout-account").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    message.textContent = "লগআউট হয়েছে।";
+  } catch (error) {
+    message.textContent = "লগআউট করা যায়নি।";
+  }
+});
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    accountInfo.textContent = "লগইন করা ইমেইল: " + user.email;
+  } else {
+    accountInfo.textContent = "তুমি এখনো লগইন করোনি।";
+  }
+});
+
 </script>
+
+<section id="account-box" style="max-width:420px;margin:20px auto;padding:20px;background:#151b2e;color:white;border-radius:16px;font-family:Arial,sans-serif;">
+  <h2 style="text-align:center;">SHAWUN EARN</h2>
+  <h3>আমার অ্যাকাউন্ট</h3>
+
+  <label for="account-email">ইমেইল</label>
+  <input id="account-email" type="email" placeholder="তোমার ইমেইল লিখো" autocomplete="email" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+
+  <label for="account-password">পাসওয়ার্ড</label>
+  <input id="account-password" type="password" placeholder="কমপক্ষে ৬ অক্ষর" autocomplete="current-password" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+
+  <button id="create-account" type="button" style="width:100%;padding:12px;margin-top:10px;background:#16a34a;color:white;border:0;border-radius:8px;">Create Account</button>
+
+  <button id="login-account" type="button" style="width:100%;padding:12px;margin-top:10px;background:#2563eb;color:white;border:0;border-radius:8px;">Login</button>
+
+  <div id="my-account" style="margin-top:16px;overflow-wrap:anywhere;">তুমি এখনো লগইন করোনি।</div>
+
+  <button id="logout-account" type="button" style="width:100%;padding:12px;margin-top:10px;background:#dc2626;color:white;border:0;border-radius:8px;">Logout</button>
+
+  <p id="account-message" role="status" style="overflow-wrap:anywhere;"></p>
+</section>
 
 </body>
 </html>
