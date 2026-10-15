@@ -132,5 +132,27 @@ function withdraw(){
 }
 </script>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCPWmCQ-7jaOE1ve18PHPeuwXENYbrNVj0",
+    authDomain: "shawun-earn.firebaseapp.com",
+    projectId: "shawun-earn",
+    storageBucket: "shawun-earn.firebasestorage.app",
+    messagingSenderId: "194329407831",
+    appId: "1:194329407831:web:1b53667a1eb8d7b5980e12",
+    measurementId: "G-57F18NMXH3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  console.log("SHAWUN EARN Firebase initialized");
+</script>
+
 </body>
 </html>
