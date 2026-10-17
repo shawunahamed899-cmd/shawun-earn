@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<script src="https://quge5.com/88/tag.min.js" data-zone="296059" async data-cfasync="false"></script>
+<script src="https://quge5.com/88/tag.min.js" data-zone="296059" data-sdk="show_296059" async data-cfasync="false"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHAWUN EARN - Earn Online</title>
@@ -37,7 +37,7 @@ nav a{text-decoration:none;color:#52627e;font-size:12px;text-align:center}
 </header>
 
 <main class="container">
-  <section class="balance">
+  <section class="balance" id="balance-box">
     <div class="small">আপনার ব্যালেন্স</div>
     <div class="amount">৳ <span id="balance">0.00</span></div>
     <button class="primary" onclick="openWithdraw()">টাকা তুলুন</button>
@@ -64,7 +64,6 @@ nav a{text-decoration:none;color:#52627e;font-size:12px;text-align:center}
   </div>
 </main>
 
-<!-- Withdraw Modal -->
 <div id="withdrawModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000bb;z-index:999;">
   <div style="background:white;max-width:400px;margin:60px auto;padding:20px;border-radius:15px;">
     <h3 style="margin-top:0;">💸 টাকা তুলুন</h3>
@@ -81,14 +80,27 @@ nav a{text-decoration:none;color:#52627e;font-size:12px;text-align:center}
   </div>
 </div>
 
+<section style="max-width:420px;margin:20px auto;padding:20px;background:#151b2e;color:white;border-radius:16px;">
+  <h2 style="text-align:center;">🔐 আমার অ্যাকাউন্ট</h2>
+  <input id="account-email" type="email" placeholder="ইমেইল" style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box;border:0;border-radius:8px;">
+  <input id="account-password" type="password" placeholder="পাসওয়ার্ড (৬+ অক্ষর)" style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box;border:0;border-radius:8px;">
+  <button id="create-account" style="width:100%;padding:12px;margin:5px 0;background:#16a34a;color:white;border:0;border-radius:8px;">Create Account</button>
+  <button id="login-account" style="width:100%;padding:12px;margin:5px 0;background:#2563eb;color:white;border:0;border-radius:8px;">Login</button>
+  <button id="logout-account" style="width:100%;padding:12px;margin:5px 0;background:#dc2626;color:white;border:0;border-radius:8px;">Logout</button>
+  <div id="my-account" style="margin-top:12px;overflow-wrap:anywhere;">তুমি লগইন করোনি।</div>
+  <p id="account-message" style="color:#fbbf24;overflow-wrap:anywhere;"></p>
+</section>
+
 <nav>
   <a href="#">🏠<br>Home</a>
-  <a href="#balance">💰<br>Balance</a>
+  <a href="#balance-box">💰<br>Balance</a>
 </nav>
+
+<footer style="text-align:center;font-size:12px;color:#7a8498;padding:15px">© 2026 SHAWUN EARN</footer>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -103,53 +115,87 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const ZONE = "296059";
+
 let balance = 0;
+const balanceEl = document.getElementById("balance");
+const msg = document.getElementById("account-message");
+const info = document.getElementById("my-account");
+
+function setBalance(v){ balance = Number(v); balanceEl.textContent = balance.toFixed(2); }
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    const ref = doc(db, "users", user.uid);
-    const snap = await getDoc(ref);
-    if (snap.exists()) {
-      balance = snap.data().balance || 0;
-    } else {
-      await setDoc(ref, { email: user.email, balance: 0, createdAt: serverTimestamp() });
-      balance = 0;
-    }
-    document.getElementById("balance").textContent = balance.toFixed(2);
+    info.textContent = "✅ লগইন: " + user.email;
+    try {
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      if (snap.exists()) setBalance(snap.data().balance || 0);
+      else { await setDoc(ref, { email: user.email, balance: 0, createdAt: serverTimestamp() }); setBalance(0); }
+    } catch(e){ console.log(e); }
+  } else {
+    info.textContent = "তুমি লগইন করোনি।";
+    setBalance(0);
   }
 });
 
+document.getElementById("create-account").onclick = async () => {
+  const email = document.getElementById("account-email").value.trim();
+  const pass = document.getElementById("account-password").value;
+  if (!email || pass.length < 6) return msg.textContent = "সঠিক ইমেইল ও ৬+ অক্ষরের পাসওয়ার্ড দাও।";
+  try { await createUserWithEmailAndPassword(auth, email, pass); msg.textContent = "✅ অ্যাকাউন্ট তৈরি হয়েছে!"; }
+  catch (e) { msg.textContent = "❌ " + e.message; }
+};
+
+document.getElementById("login-account").onclick = async () => {
+  const email = document.getElementById("account-email").value.trim();
+  const pass = document.getElementById("account-password").value;
+  try { await signInWithEmailAndPassword(auth, email, pass); msg.textContent = "✅ লগইন সফল!"; }
+  catch (e) { msg.textContent = "❌ ভুল ইমেইল বা পাসওয়ার্ড"; }
+};
+
+document.getElementById("logout-account").onclick = async () => { await signOut(auth); msg.textContent = "লগআউট হয়েছে।"; };
+
 async function addMoney(amount) {
   const user = auth.currentUser;
-  if (!user) return alert("আগে লগইন করুন!");
   await updateDoc(doc(db, "users", user.uid), { balance: increment(amount) });
-  balance += amount;
-  document.getElementById("balance").textContent = balance.toFixed(2);
+  setBalance(balance + amount);
+}
+
+function waitAdFunction(timeout = 8000) {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const timer = setInterval(() => {
+      if (typeof window["show_" + ZONE] === "function") { clearInterval(timer); resolve(window["show_" + ZONE]); }
+      else if (Date.now() - start > timeout) { clearInterval(timer); reject("timeout"); }
+    }, 300);
+  });
 }
 
 window.watchAd = async () => {
-  if (!auth.currentUser) return alert("আগে লগইন করুন!");
-  if (typeof window.show_296059 === "function") {
-    window.show_296059().then(() => {
-      addMoney(0.50).then(() => alert("🎉 ৳0.50 যোগ হয়েছে!"));
-    });
-  } else {
-    alert("Ad লোড হয়নি, কিছুক্ষণ পর চেষ্টা করুন।");
+  if (!auth.currentUser) return alert("আগে নিচের কালো বক্স থেকে Login করুন!");
+  alert("Ad আসছে... পুরোটা দেখে Close করো!");
+  try {
+    const show = await waitAdFunction();
+    await show();
+    await addMoney(0.50);
+    alert("🎉 ৳0.50 ব্যালেন্সে যোগ হয়েছে!");
+  } catch (e) {
+    alert("❌ Ad লোড হয়নি!\n\nসমাধান: Monetag-এ Zone " + ZONE + " এর Format 'Interstitial' কিনা চেক করো।");
   }
 };
 
 window.dailyBonus = async () => {
-  if (!auth.currentUser) return alert("আগে লগইন করুন!");
+  if (!auth.currentUser) return alert("আগে Login করুন!");
   const today = new Date().toDateString();
-  const last = localStorage.getItem("lastBonus");
-  if (last === today) return alert("আজকের বোনাস নেওয়া হয়ে গেছে!");
+  if (localStorage.getItem("lastBonus") === today) return alert("আজকের বোনাস নেওয়া হয়ে গেছে! কাল আবার আসো।");
   localStorage.setItem("lastBonus", today);
   await addMoney(1.00);
   alert("🎁 ৳1.00 ডেইলি বোনাস পেয়েছেন!");
 };
 
 window.openWithdraw = () => {
-  if (!auth.currentUser) return alert("আগে লগইন করুন!");
+  if (!auth.currentUser) return alert("আগে Login করুন!");
   document.getElementById("withdrawModal").style.display = "block";
 };
 window.closeWithdraw = () => document.getElementById("withdrawModal").style.display = "none";
@@ -159,56 +205,17 @@ window.submitWithdraw = async () => {
   const method = document.getElementById("wmethod").value;
   const number = document.getElementById("wnumber").value.trim();
   const amount = parseFloat(document.getElementById("wamount").value);
-
-  if (number.length < 11) return alert("সঠিক ১১ ডিজিটের নম্বর দিন");
+  if (number.length !== 11) return alert("সঠিক ১১ ডিজিটের নম্বর দিন");
   if (!amount || amount < 100) return alert("সর্বনিম্ন ৳100 তুলতে হবে");
   if (amount > balance) return alert("পর্যাপ্ত ব্যালেন্স নেই");
-
-  await addDoc(collection(db, "withdrawals"), {
-    uid: user.uid, email: user.email, method, number,
-    amount, status: "pending", createdAt: serverTimestamp()
-  });
-
-  await updateDoc(doc(db, "users", user.uid), { balance: increment(-amount) });
-  balance -= amount;
-  document.getElementById("balance").textContent = balance.toFixed(2);
-  alert("✅ Withdraw Request পাঠানো হয়েছে!");
-  closeWithdraw();
+  try {
+    await addDoc(collection(db, "withdrawals"), { uid: user.uid, email: user.email, method, number, amount, status: "pending", createdAt: serverTimestamp() });
+    await updateDoc(doc(db, "users", user.uid), { balance: increment(-amount) });
+    setBalance(balance - amount);
+    alert("✅ Withdraw Request পাঠানো হয়েছে!");
+    closeWithdraw();
+  } catch (e) { alert("সমস্যা: " + e.message); }
 };
-</script>
-
-<section id="account-box" style="max-width:420px;margin:20px auto;padding:20px;background:#151b2e;color:white;border-radius:16px;">
-  <h2 style="text-align:center;">🔐 আমার অ্যাকাউন্ট</h2>
-  <input id="account-email" type="email" placeholder="ইমেইল" style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box;">
-  <input id="account-password" type="password" placeholder="পাসওয়ার্ড (৬+ অক্ষর)" style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box;">
-  <button id="create-account" style="width:100%;padding:12px;margin:5px 0;background:#16a34a;color:white;border:0;border-radius:8px;">Create Account</button>
-  <button id="login-account" style="width:100%;padding:12px;margin:5px 0;background:#2563eb;color:white;border:0;border-radius:8px;">Login</button>
-  <button id="logout-account" style="width:100%;padding:12px;margin:5px 0;background:#dc2626;color:white;border:0;border-radius:8px;">Logout</button>
-  <div id="my-account" style="margin-top:12px;">তুমি লগইন করোনি।</div>
-  <p id="account-message" style="color:#fbbf24;"></p>
-</section>
-
-<script type="module">
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-  from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-const app2 = initializeApp(firebaseConfig);
-const auth2 = getAuth(app2);
-const emailInput = document.getElementById("account-email");
-const passInput = document.getElementById("account-password");
-const msg = document.getElementById("account-message");
-const info = document.getElementById("my-account");
-
-document.getElementById("create-account").onclick = async () => {
-  try { await createUserWithEmailAndPassword(auth2, emailInput.value, passInput.value); msg.textContent = "✅ অ্যাকাউন্ট তৈরি!"; }
-  catch (e) { msg.textContent = "❌ " + e.message; }
-};
-document.getElementById("login-account").onclick = async () => {
-  try { await signInWithEmailAndPassword(auth2, emailInput.value, passInput.value); msg.textContent = "✅ লগইন সফল!"; }
-  catch (e) { msg.textContent = "❌ ভুল ইমেইল/পাসওয়ার্ড"; }
-};
-document.getElementById("logout-account").onclick = async () => { await signOut(auth2); msg.textContent = "লগআউট হয়েছে।"; };
-onAuthStateChanged(auth2, u => { info.textContent = u ? "লগইন: " + u.email : "তুমি লগইন করোনি।"; });
 </script>
 
 </body>
