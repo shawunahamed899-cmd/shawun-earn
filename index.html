@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -8,74 +7,40 @@
 <title>SHAWUN EARN - Earn Online</title>
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f3f6ff;
-  color:#18233d;
-}
-header{
-  background:linear-gradient(135deg,#102b70,#1768e8);
-  color:white;padding:24px 18px 32px;
-  border-radius:0 0 25px 25px;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6ff;color:#18233d}
+header{background:linear-gradient(135deg,#102b70,#1768e8);color:white;padding:24px 18px 32px;border-radius:0 0 25px 25px}
 .brand{font-size:25px;font-weight:900}
 .brand span{color:#65f2c2}
 header p{font-size:14px;color:#e0eaff}
 .container{max-width:520px;margin:auto;padding:16px}
-.balance{
-  background:white;border-radius:18px;padding:20px;
-  margin-top:-10px;box-shadow:0 5px 20px #102b7010;
-}
+.balance{background:white;border-radius:18px;padding:20px;margin-top:-10px;box-shadow:0 5px 20px #102b7010}
 .small{font-size:13px;color:#64718b}
 .amount{font-size:32px;font-weight:bold;color:#145ce0;margin:10px 0}
-button{
-  border:0;border-radius:11px;padding:13px;
-  font-weight:bold;font-size:15px;cursor:pointer;
-}
+button{border:0;border-radius:11px;padding:13px;font-weight:bold;font-size:15px;cursor:pointer}
 .primary{background:#1768e8;color:white;width:100%}
 h3{font-size:18px;margin:23px 0 12px}
-.task{
-  background:white;border-radius:15px;padding:16px;
-  margin-bottom:12px;display:flex;align-items:center;gap:12px;
-  box-shadow:0 3px 12px #102b7008;
-}
-.emoji{
-  background:#eaf1ff;border-radius:12px;padding:13px;
-  font-size:24px;
-}
+.task{background:white;border-radius:15px;padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;box-shadow:0 3px 12px #102b7008}
+.emoji{background:#eaf1ff;border-radius:12px;padding:13px;font-size:24px}
 .taskinfo{flex:1}
 .taskinfo b{font-size:15px}
 .taskinfo p{margin:6px 0 0;font-size:12px;color:#64718b}
 .task button{background:#e7efff;color:#145ce0;padding:10px}
-.notice{
-  background:#fff7df;color:#795500;padding:13px;
-  border-radius:12px;font-size:12px;line-height:1.6;
-  margin-top:18px;
-}
-nav{
-  position:sticky;bottom:0;background:white;display:flex;
-  justify-content:space-around;padding:14px 5px;
-  border-top:1px solid #e8ecf5;margin-top:20px;
-}
-nav a{text-decoration:none;color:#52627e;font-size:12px}
-footer{text-align:center;font-size:12px;color:#7a8498;padding:15px}
+nav{position:sticky;bottom:0;background:white;display:flex;justify-content:space-around;padding:14px 5px;border-top:1px solid #e8ecf5;margin-top:20px}
+nav a{text-decoration:none;color:#52627e;font-size:12px;text-align:center}
 </style>
 </head>
 <body>
 
 <header>
   <div class="brand">SHAWUN <span>EARN</span></div>
-  <p>ছোট ছোট অনলাইন টাস্ক সম্পর্কে জানুন</p>
+  <p>ছোট ছোট অনলাইন টাস্ক করে আয় করুন</p>
 </header>
 
 <main class="container">
   <section class="balance">
-    <div class="small">আপনার ডেমো ব্যালেন্স</div>
+    <div class="small">আপনার ব্যালেন্স</div>
     <div class="amount">৳ <span id="balance">0.00</span></div>
-    <button class="primary" onclick="withdraw()">
-      টাকা তোলার তথ্য
-    </button>
+    <button class="primary" onclick="openWithdraw()">টাকা তুলুন</button>
   </section>
 
   <h3>🚀 Earn করার টাস্ক</h3>
@@ -84,165 +49,167 @@ footer{text-align:center;font-size:12px;color:#7a8498;padding:15px}
     <div class="emoji">📺</div>
     <div class="taskinfo">
       <b>Watch Ads</b>
-      <p>বিজ্ঞাপন দেখার ফিচার</p>
+      <p>১টি বিজ্ঞাপন দেখে ৳0.50 আয় করুন</p>
     </div>
-    <button onclick="showInfo()">দেখুন</button>
+    <button onclick="watchAd()">দেখুন</button>
   </div>
 
   <div class="task">
-    <div class="emoji">📱</div>
+    <div class="emoji">🎁</div>
     <div class="taskinfo">
-      <b>Telegram</b>
-      <p>Telegram সংযোগের ফিচার</p>
+      <b>Daily Bonus</b>
+      <p>প্রতিদিন ৳1.00 ফ্রি বোনাস</p>
     </div>
-    <button onclick="showInfo()">দেখুন</button>
-  </div>
-
-  <div class="task">
-    <div class="emoji">🎯</div>
-    <div class="taskinfo">
-      <b>Daily Task</b>
-      <p>দৈনিক টাস্কের ফিচার</p>
-    </div>
-    <button onclick="showInfo()">দেখুন</button>
-  </div>
-
-  <div class="notice">
-    <b>ℹ️ গুরুত্বপূর্ণ তথ্য</b><br>
-    এটি ওয়েবসাইটের প্রাথমিক ডেমো। এখানে এখনো
-    আসল বিজ্ঞাপন, যাচাইকৃত আয়, Telegram লগইন
-    অথবা টাকা তোলার ব্যবস্থা চালু নেই।
+    <button onclick="dailyBonus()">নিন</button>
   </div>
 </main>
+
+<!-- Withdraw Modal -->
+<div id="withdrawModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000bb;z-index:999;">
+  <div style="background:white;max-width:400px;margin:60px auto;padding:20px;border-radius:15px;">
+    <h3 style="margin-top:0;">💸 টাকা তুলুন</h3>
+    <label>পদ্ধতি:</label>
+    <select id="wmethod" style="width:100%;padding:10px;margin:5px 0 10px;">
+      <option>bKash</option><option>Nagad</option><option>Rocket</option>
+    </select>
+    <label>নম্বর:</label>
+    <input id="wnumber" style="width:100%;padding:10px;margin:5px 0 10px;" placeholder="01XXXXXXXXX">
+    <label>পরিমাণ (সর্বনিম্ন ৳100):</label>
+    <input id="wamount" type="number" style="width:100%;padding:10px;margin:5px 0 10px;">
+    <button onclick="submitWithdraw()" style="background:#1768e8;color:white;padding:12px;width:100%;border:0;border-radius:8px;">Submit</button>
+    <button onclick="closeWithdraw()" style="background:#ddd;padding:12px;width:100%;margin-top:8px;border:0;border-radius:8px;">বন্ধ করুন</button>
+  </div>
+</div>
 
 <nav>
   <a href="#">🏠<br>Home</a>
   <a href="#balance">💰<br>Balance</a>
-  <a href="#tasks">🎯<br>Tasks</a>
 </nav>
 
-<footer>© 2026 SHAWUN EARN</footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
-<script>
-function showInfo(){
-  alert("এই ফিচারটি এখনো চালু করা হয়নি।");
+const firebaseConfig = {
+  apiKey: "AIzaSyCPWmCQ-7jaOE1ve18PHPeuwXENYbrNVj0",
+  authDomain: "shawun-earn.firebaseapp.com",
+  projectId: "shawun-earn",
+  storageBucket: "shawun-earn.firebasestorage.app",
+  messagingSenderId: "194329407831",
+  appId: "1:194329407831:web:1b53667a1eb8d7b5980e12"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+let balance = 0;
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const ref = doc(db, "users", user.uid);
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      balance = snap.data().balance || 0;
+    } else {
+      await setDoc(ref, { email: user.email, balance: 0, createdAt: serverTimestamp() });
+      balance = 0;
+    }
+    document.getElementById("balance").textContent = balance.toFixed(2);
+  }
+});
+
+async function addMoney(amount) {
+  const user = auth.currentUser;
+  if (!user) return alert("আগে লগইন করুন!");
+  await updateDoc(doc(db, "users", user.uid), { balance: increment(amount) });
+  balance += amount;
+  document.getElementById("balance").textContent = balance.toFixed(2);
 }
-function withdraw(){
-  alert("টাকা তোলার ব্যবস্থা চালু হলে এখানে তথ্য দেখানো হবে।");
-}
+
+window.watchAd = async () => {
+  if (!auth.currentUser) return alert("আগে লগইন করুন!");
+  if (typeof window.show_296059 === "function") {
+    window.show_296059().then(() => {
+      addMoney(0.50).then(() => alert("🎉 ৳0.50 যোগ হয়েছে!"));
+    });
+  } else {
+    alert("Ad লোড হয়নি, কিছুক্ষণ পর চেষ্টা করুন।");
+  }
+};
+
+window.dailyBonus = async () => {
+  if (!auth.currentUser) return alert("আগে লগইন করুন!");
+  const today = new Date().toDateString();
+  const last = localStorage.getItem("lastBonus");
+  if (last === today) return alert("আজকের বোনাস নেওয়া হয়ে গেছে!");
+  localStorage.setItem("lastBonus", today);
+  await addMoney(1.00);
+  alert("🎁 ৳1.00 ডেইলি বোনাস পেয়েছেন!");
+};
+
+window.openWithdraw = () => {
+  if (!auth.currentUser) return alert("আগে লগইন করুন!");
+  document.getElementById("withdrawModal").style.display = "block";
+};
+window.closeWithdraw = () => document.getElementById("withdrawModal").style.display = "none";
+
+window.submitWithdraw = async () => {
+  const user = auth.currentUser;
+  const method = document.getElementById("wmethod").value;
+  const number = document.getElementById("wnumber").value.trim();
+  const amount = parseFloat(document.getElementById("wamount").value);
+
+  if (number.length < 11) return alert("সঠিক ১১ ডিজিটের নম্বর দিন");
+  if (!amount || amount < 100) return alert("সর্বনিম্ন ৳100 তুলতে হবে");
+  if (amount > balance) return alert("পর্যাপ্ত ব্যালেন্স নেই");
+
+  await addDoc(collection(db, "withdrawals"), {
+    uid: user.uid, email: user.email, method, number,
+    amount, status: "pending", createdAt: serverTimestamp()
+  });
+
+  await updateDoc(doc(db, "users", user.uid), { balance: increment(-amount) });
+  balance -= amount;
+  document.getElementById("balance").textContent = balance.toFixed(2);
+  alert("✅ Withdraw Request পাঠানো হয়েছে!");
+  closeWithdraw();
+};
 </script>
+
+<section id="account-box" style="max-width:420px;margin:20px auto;padding:20px;background:#151b2e;color:white;border-radius:16px;">
+  <h2 style="text-align:center;">🔐 আমার অ্যাকাউন্ট</h2>
+  <input id="account-email" type="email" placeholder="ইমেইল" style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box;">
+  <input id="account-password" type="password" placeholder="পাসওয়ার্ড (৬+ অক্ষর)" style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box;">
+  <button id="create-account" style="width:100%;padding:12px;margin:5px 0;background:#16a34a;color:white;border:0;border-radius:8px;">Create Account</button>
+  <button id="login-account" style="width:100%;padding:12px;margin:5px 0;background:#2563eb;color:white;border:0;border-radius:8px;">Login</button>
+  <button id="logout-account" style="width:100%;padding:12px;margin:5px 0;background:#dc2626;color:white;border:0;border-radius:8px;">Logout</button>
+  <div id="my-account" style="margin-top:12px;">তুমি লগইন করোনি।</div>
+  <p id="account-message" style="color:#fbbf24;"></p>
+</section>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
-  
-import { getFirestore } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
-
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCPWmCQ-7jaOE1ve18PHPeuwXENYbrNVj0",
-    authDomain: "shawun-earn.firebaseapp.com",
-    projectId: "shawun-earn",
-    storageBucket: "shawun-earn.firebasestorage.app",
-    messagingSenderId: "194329407831",
-    appId: "1:194329407831:web:1b53667a1eb8d7b5980e12",
-    measurementId: "G-57F18NMXH3"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  console.log("SHAWUN EARN Firebase initialized");
-
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+const app2 = initializeApp(firebaseConfig);
+const auth2 = getAuth(app2);
 const emailInput = document.getElementById("account-email");
-const passwordInput = document.getElementById("account-password");
-const message = document.getElementById("account-message");
-const accountInfo = document.getElementById("my-account");
-document.getElementById("reset-password").addEventListener("click", async () => {
-  const email = emailInput.value.trim();
-  if (!email) {
-    message.textContent = "আগে তোমার ইমেইল লেখো।";
-    return;
-  }
+const passInput = document.getElementById("account-password");
+const msg = document.getElementById("account-message");
+const info = document.getElementById("my-account");
 
-  try {
-    await sendPasswordResetEmail(auth, email);
-    message.textContent = "পাসওয়ার্ড রিসেটের ইমেইল পাঠানো হয়েছে। Gmail দেখো।";
-  } catch (error) {
-    message.textContent = "সমস্যা: " + error.message;
-  }
-});
-
-document.getElementById("create-account").addEventListener("click", async () => {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-  if (!email || password.length < 6) {
-    message.textContent = "সঠিক ইমেইল ও অন্তত ৬ অক্ষরের পাসওয়ার্ড দাও।";
-    return;
-  }
-
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    message.textContent = "অ্যাকাউন্ট তৈরি হয়েছে!";
-  } catch (error) {
-    message.textContent = "সমস্যা: " + error.message;
-  }
-});
-
-document.getElementById("login-account").addEventListener("click", async () => {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    message.textContent = "লগইন সফল হয়েছে!";
-  } catch (error) {
-    message.textContent = "লগইন করা যায়নি। ইমেইল ও পাসওয়ার্ড পরীক্ষা করো।";
-  }
-});
-
-document.getElementById("logout-account").addEventListener("click", async () => {
-  try {
-    await signOut(auth);
-    message.textContent = "লগআউট হয়েছে।";
-  } catch (error) {
-    message.textContent = "লগআউট করা যায়নি।";
-  }
-});
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    accountInfo.textContent = "লগইন করা ইমেইল: " + user.email;
-  } else {
-    accountInfo.textContent = "তুমি এখনো লগইন করোনি।";
-  }
-});
-
+document.getElementById("create-account").onclick = async () => {
+  try { await createUserWithEmailAndPassword(auth2, emailInput.value, passInput.value); msg.textContent = "✅ অ্যাকাউন্ট তৈরি!"; }
+  catch (e) { msg.textContent = "❌ " + e.message; }
+};
+document.getElementById("login-account").onclick = async () => {
+  try { await signInWithEmailAndPassword(auth2, emailInput.value, passInput.value); msg.textContent = "✅ লগইন সফল!"; }
+  catch (e) { msg.textContent = "❌ ভুল ইমেইল/পাসওয়ার্ড"; }
+};
+document.getElementById("logout-account").onclick = async () => { await signOut(auth2); msg.textContent = "লগআউট হয়েছে।"; };
+onAuthStateChanged(auth2, u => { info.textContent = u ? "লগইন: " + u.email : "তুমি লগইন করোনি।"; });
 </script>
-
-<section id="account-box" style="max-width:420px;margin:20px auto;padding:20px;background:#151b2e;color:white;border-radius:16px;font-family:Arial,sans-serif;">
-  <h2 style="text-align:center;">SHAWUN EARN</h2>
-  <h3>আমার অ্যাকাউন্ট</h3>
-
-  <label for="account-email">ইমেইল</label>
-  <input id="account-email" type="email" placeholder="তোমার ইমেইল লিখো" autocomplete="email" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
-
-  <label for="account-password">পাসওয়ার্ড</label>
-  <input id="account-password" type="password" placeholder="কমপক্ষে ৬ অক্ষর" autocomplete="current-password" style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
-<button id="reset-password" type="button" style="width:100%;padding:12px;margin-top:10px;background:#7c3aed;color:white;border:0;border-radius:8px;">Forgot Password / পাসওয়ার্ড ভুলে গেছি</button>
-
-  <button id="create-account" type="button" style="width:100%;padding:12px;margin-top:10px;background:#16a34a;color:white;border:0;border-radius:8px;">Create Account</button>
-
-  <button id="login-account" type="button" style="width:100%;padding:12px;margin-top:10px;background:#2563eb;color:white;border:0;border-radius:8px;">Login</button>
-
-  <div id="my-account" style="margin-top:16px;overflow-wrap:anywhere;">তুমি এখনো লগইন করোনি।</div>
-
-  <button id="logout-account" type="button" style="width:100%;padding:12px;margin-top:10px;background:#dc2626;color:white;border:0;border-radius:8px;">Logout</button>
-
-  <p id="account-message" role="status" style="overflow-wrap:anywhere;"></p>
-</section>
 
 </body>
 </html>
