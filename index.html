@@ -159,6 +159,20 @@ const emailInput = document.getElementById("account-email");
 const passwordInput = document.getElementById("account-password");
 const message = document.getElementById("account-message");
 const accountInfo = document.getElementById("my-account");
+document.getElementById("reset-password").addEventListener("click", async () => {
+  const email = emailInput.value.trim();
+  if (!email) {
+    message.textContent = "আগে তোমার ইমেইল লেখো।";
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    message.textContent = "পাসওয়ার্ড রিসেটের ইমেইল পাঠানো হয়েছে। Gmail দেখো।";
+  } catch (error) {
+    message.textContent = "সমস্যা: " + error.message;
+  }
+});
 
 document.getElementById("create-account").addEventListener("click", async () => {
   const email = emailInput.value.trim();
